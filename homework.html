@@ -83,10 +83,36 @@
 
 </head>
 
+<script>
+    $(document).ready(function(){
+	$.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rtan",
+                data: {},
+                success: function (response) {
+                  let url = response['url']
+                  let msg = response['msg']
+
+                  console.log(url,msg )
+
+                  //여기 attr 과 text 는 뭘까?
+                  $('#img-rtan').attr('src',url)
+                  $('#text-rtan').text(msg)
+
+                }
+})
+});
+
+
+</script>
+
 <body>
 
       <div class="mytitle">
           <h1>과학 5호기 방명록</h1>
+          <p>현재 기온 : <span id ="temp">00.0도 </span>도 </p>
+
+<!--          위에다가 .text를 이용해서 바꾸어주기-->
       </div>
 
       <div class = "posts">

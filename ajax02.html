@@ -22,6 +22,11 @@
             padding: 10px;
             border: 1px solid;
         }
+
+        .urgent{
+            color: red;
+
+        }
     </style>
 
     <script>
@@ -32,13 +37,34 @@
                 data: {},
                 success: function (response) {
 
-                    let rows = console.log(response['getStationList']['row'])
-                    for (let i = 0 ; i< rows.lenth; i++){
+                    $('#names-q1').empty() //여기에 해야함
+                    let rows = response['getStationList']['row']
+                    for (let i = 0 ; i< rows.length; i++){
+
+
+
                         let name = rows[i]['stationName']
                         let rack = rows[i]['rackTotCnt']
                         let bike = rows[i]['parkingBikeTotCnt']
 
+                        console.log(name,rack,bike)
 
+                        let temp_html = ' '
+
+                        if(bike < 5){
+                            temp_html = `<tr class="urgent">
+                                        <td>${name}</td>
+                                        <td>${rack}</td>
+                                        <td>${bike}</td>
+                                        </tr>`
+                        } else{
+                            temp_html = `<tr class>
+                                        <td>${name}</td>
+                                        <td>${rack}</td>
+                                        <td>${bike}</td>
+                                        </tr>`
+                        }
+                        $('#names-q1').append(temp_html)
                     }
 
                 }
@@ -67,21 +93,7 @@
                 </tr>
             </thead>
             <tbody id="names-q1">
-                <tr>
-                    <td>102. 망원역 1번출구 앞</td>
-                    <td>22</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>103. 망원역 2번출구 앞</td>
-                    <td>16</td>
-                    <td>0</td>
-                </tr>
-                <tr>
-                    <td>104. 합정역 1번출구 앞</td>
-                    <td>16</td>
-                    <td>0</td>
-                </tr>
+
             </tbody>
         </table>
     </div>
